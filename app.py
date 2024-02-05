@@ -4,15 +4,12 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
-# Carga las variables de entorno desde .env
 load_dotenv()
 
 token = os.getenv('TOKEN_OPEN_AI')
 client = OpenAI(api_key=token)
 
 app = Flask(__name__)
-
-# Configura tu clave de API de OpenAI aquí
 
 @app.route('/')
 def home():
@@ -21,7 +18,8 @@ def home():
 @app.route('/respuesta', methods=['POST'])
 def get_answer():
     question = request.form['question']
-    response = client.chat.completions.create(model="gpt-3.5-turbo",
+    #response = client.chat.completions.create(model="gpt-3.5-turbo",
+    response = client.chat.completions.create(model="gpt-3.5-turbo-0125",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": question}
